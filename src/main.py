@@ -9,7 +9,7 @@ from intersect import *
 # it is worth to read README.md file at https://github.com/CamaroTheBOSS/Maze-Generator
 # if you like my project please star it at github :D
 
-# returns subtraction of two lists [1, 2, 3, 4] - [1, 4] = [2, 3]
+# returns subtraction of two lists [1, 2, 3, 4, 5] - [1, 4] = [2, 3, 5]
 def Diff(li1, li2):
     return list(set(li1) - set(li2)) + list(set(li2) - set(li1))
 
