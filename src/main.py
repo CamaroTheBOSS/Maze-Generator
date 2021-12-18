@@ -64,11 +64,11 @@ def DualGraph(G: Graph):
                 y += Nodes[-1][1]
         x /= len(face)
         y /= len(face)
-        print(str(x) + ", " + str(y))
         F.addNode(x, y)
 
     # 2. Defining edges with k-nearest neighbours algorithm
     neighnum = len(G.faces[0])
+    factor = 0
     if neighnum == 6:
         factor = 2.1
     elif neighnum == 3:

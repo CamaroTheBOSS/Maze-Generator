@@ -18,7 +18,6 @@ def Hex(G: Graph, column, row, a):
     # 3. Adding Nodes and Edges
     G.addNode(x, y)
     for k in range(5):
-        print(k)
         x += shiftX[k]
         y += shiftY[k]
         G.addNode(x, y)
