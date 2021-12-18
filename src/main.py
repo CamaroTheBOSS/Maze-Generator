@@ -26,6 +26,10 @@ def prepareGraph(G: Graph, columns: int = 5, rows: int = 5, shape='Hexagon'):  #
         for c in range(columns):
             for r in range(rows):
                 Triangle(G, c, r, a)
+    if shape == 'Square':
+        for c in range(columns):
+            for r in range(rows):
+                Square(G, c, r, a)
 
     # 2. deleting duplicated nodes and edges (indexes repairing):
     Temp = list(set(G.nodes))
@@ -166,7 +170,7 @@ def DeleteIntersections(G: Graph, F: Graph):
 # Algorithm:
 Z = Graph()
 # 1.
-prepareGraph(Z, columns=25, rows=25, shape='Hexagon')
+prepareGraph(Z, columns=20, rows=20, shape='Square')
 # 2.
 Zd = DualGraph(Z)
 # 3.

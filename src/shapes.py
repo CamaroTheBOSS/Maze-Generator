@@ -30,6 +30,7 @@ def Hex(G: Graph, column, row, a):
 
 def Triangle(G: Graph, column, row, a):
     h = 0.9 * a
+    # 1. Defining starting point and shape
     if (column + 1) % 2 == 0 and (row + 1) % 2 == 0:  # column and row even
         y = -h * row
         x = a * column / 2
@@ -50,8 +51,9 @@ def Triangle(G: Graph, column, row, a):
         y = -h * row
         shiftX = [a, -0.5*a, -0.5*a]
         shiftY = [0, h, -h]
-    Face = []
 
+    # 2. Adding Nodes and Edges
+    Face = []
     G.addNode(x, y)
     for k in range(2):
         x += shiftX[k]
@@ -60,5 +62,25 @@ def Triangle(G: Graph, column, row, a):
         G.addEdge(len(G.nodes) - 1, len(G.nodes) - 2)
         Face.append(G.edges[-1])
     G.addEdge(len(G.nodes) - 1, len(G.nodes) - 3)
+    Face.append(G.edges[-1])
+    G.addFace(Face)
+
+
+def Square(G: Graph, column, row, a):
+    x = a * column
+    y = - a * row
+
+    shiftX = [a, 0, -a, 0]
+    shiftY = [0, -a, 0, a]
+
+    Face = []
+    G.addNode(x, y)
+    for k in range(3):
+        x += shiftX[k]
+        y += shiftY[k]
+        G.addNode(x, y)
+        G.addEdge(len(G.nodes) - 1, len(G.nodes) - 2)
+        Face.append(G.edges[-1])
+    G.addEdge(len(G.nodes) - 1, len(G.nodes) - 4)
     Face.append(G.edges[-1])
     G.addFace(Face)
