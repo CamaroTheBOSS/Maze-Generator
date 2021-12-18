@@ -1,5 +1,5 @@
 # Maze-Generator
-Maze generator with most popular shapes - hexagon, triangle, square (triangle and sqaure not implemented yet):
+Maze generator with most popular shapes - hexagon, triangle, square (sqaure not implemented yet):
 
 
 1. Theory: 
@@ -75,6 +75,9 @@ algorithm which travels around the dual graph and creates actual maze. The last 
 
 - Program is inefficient for large mazes (32x32 is constructing 30sec), so it is recommended to test program for max 20x20 size :)
 - Changing shape's edge size to enough small value (a = 1) could cause some bugs in dual graph's structure
-  
+- To get the best effect in triangle maze call prepareGraph with columns and rows values in ratio 3:2 (18x12, 24x16 etc.)
+
+  ![image](https://user-images.githubusercontent.com/67116759/146642946-04428302-f13e-4d34-878a-1060f6a39599.png)
+
 
   
