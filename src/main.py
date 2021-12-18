@@ -15,12 +15,17 @@ def Diff(li1, li2):
 
 
 # constructing grid of cells (blue graph) with given shape (not implemented yet) and size
-def prepareGraph(G: Graph, columns: int = 5, rows: int = 5):  # a - edgeSize
+def prepareGraph(G: Graph, columns: int = 5, rows: int = 5, shape='Hexagon'):  # a - edgeSize
     a = 5
-    # 1. preparing Hexes
-    for c in range(columns):
-        for r in range(rows):
-            Hex(G, c, r, a)
+    # 1. preparing shapes:
+    if shape == 'Hexagon':
+        for c in range(columns):
+            for r in range(rows):
+                Hex(G, c, r, a)
+    if shape == 'Triangle':
+        for c in range(columns):
+            for r in range(rows):
+                Triangle(G, c, r, a)
 
     # 2. deleting duplicated nodes and edges (indexes repairing):
     Temp = list(set(G.nodes))
@@ -62,6 +67,13 @@ def DualGraph(G: Graph):
         F.addNode(x, y)
 
     # 2. Defining edges with k-nearest neighbours algorithm
+    neighnum = len(G.faces[0])
+    if neighnum == 6:
+        factor = 2.1
+    elif neighnum == 3:
+        factor = 0.65
+    elif neighnum == 4:
+        factor = 1.1
     for node in F.nodes:
         nodeidx = F.nodes.index(node)
         k = []  # nearest nodes indexes
@@ -72,12 +84,12 @@ def DualGraph(G: Graph):
             d = (node[0] - n[0]) ** 2 + (node[1] - n[1]) ** 2
             distances.append(d)
             k.append(F.nodes.index(n))
-            if len(k) > 6:
+            if len(k) > neighnum:
                 idx = distances.index(max(distances))
                 del k[idx]
                 del distances[idx]
         for idx in k:
-            if np.sqrt(distances[k.index(idx)]) < 3 * a:
+            if np.sqrt(distances[k.index(idx)]) < factor * a:
                 F.addEdge(nodeidx, idx)
 
     F.edges = list(set(tuple(sorted(l)) for l in F.edges))  # deleting duplicates
@@ -151,7 +163,7 @@ def DeleteIntersections(G: Graph, F: Graph):
 # Algorithm:
 Z = Graph()
 # 1.
-prepareGraph(Z, columns=16, rows=16)
+prepareGraph(Z, columns=24, rows=16, shape='Triangle')
 # 2.
 Zd = DualGraph(Z)
 # 3.
@@ -160,8 +172,8 @@ Maze(Zd)
 DeleteIntersections(Z, Zd)
 
 # plotting ways
-for i in range(len(Zd.edges)):
-    Zd.plotEdge(i, color='r')
+#for i in range(len(Zd.edges)):
+   # Zd.plotEdge(i, color='r')
 
 # plotting walls
 for i in range(len(Z.edges)):
