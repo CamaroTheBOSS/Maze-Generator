@@ -64,6 +64,7 @@ def DualGraph(G: Graph):
                 y += Nodes[-1][1]
         x /= len(face)
         y /= len(face)
+        print(str(x) + ", " + str(y))
         F.addNode(x, y)
 
     # 2. Defining edges with k-nearest neighbours algorithm
@@ -120,10 +121,12 @@ def Maze(F: Graph):
             way = ways[rdn]
             ways.remove(way)
         else:  # dead end
-            idx = Backtracking[-1]
-            del Backtracking[-1]
-            continue
-
+            if len(Backtracking) > 0:
+                idx = Backtracking[-1]
+                del Backtracking[-1]
+                continue
+            else:
+                break
         # 2.3 to Visited list add next node which way leads to and add this node to backtracking list
         if way[0] == idx:
             idx = way[1]
@@ -163,7 +166,7 @@ def DeleteIntersections(G: Graph, F: Graph):
 # Algorithm:
 Z = Graph()
 # 1.
-prepareGraph(Z, columns=24, rows=16, shape='Triangle')
+prepareGraph(Z, columns=25, rows=25, shape='Hexagon')
 # 2.
 Zd = DualGraph(Z)
 # 3.
@@ -172,10 +175,11 @@ Maze(Zd)
 DeleteIntersections(Z, Zd)
 
 # plotting ways
-#for i in range(len(Zd.edges)):
-   # Zd.plotEdge(i, color='r')
+for i in range(len(Zd.edges)):
+    Zd.plotEdge(i, color='r')
 
 # plotting walls
 for i in range(len(Z.edges)):
     Z.plotEdge(i)
+
 plt.show()
