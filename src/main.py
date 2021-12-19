@@ -172,7 +172,7 @@ def DeleteIntersections(G: Graph, F: Graph):
 # Algorithm:
 Z = Graph()  # grid
 # 1.
-prepareGraph(Z, columns=20, rows=20, shape='Square')
+prepareGraph(Z, columns=20, rows=20, shape='Hexagon')
 # 2.
 Zd = DualGraph(Z)
 # 3.
@@ -195,9 +195,8 @@ for i in range(len(Zd.edges)):
 for i in range(len(Z.edges)):
     Z.plotEdge(i)
 
-#for i in range(len(S.edges)):
-    #S.plotEdge(i, color='r')
 
+# animated path extension
 def animate(i, F, PATH, data, x, y):
     if i < len(PATH):
         nidx1 = PATH[i][0]
