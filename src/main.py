@@ -168,9 +168,10 @@ def DeleteIntersections(G: Graph, F: Graph):
 
 
 # Algorithm:
-Z = Graph()
+Z = Graph()  # grid
+S = Graph()  # solution from first visited node to last visited node
 # 1.
-prepareGraph(Z, columns=20, rows=20, shape='Square')
+prepareGraph(Z, columns=4, rows=4, shape='Hexagon')
 # 2.
 Zd = DualGraph(Z)
 # 3.
@@ -185,5 +186,8 @@ for i in range(len(Zd.edges)):
 # plotting walls
 for i in range(len(Z.edges)):
     Z.plotEdge(i)
+
+for i in range(len(S.edges)):
+    S.plotEdge(i, color='g')
 
 plt.show()
