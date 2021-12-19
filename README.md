@@ -1,5 +1,5 @@
 # Maze-Generator
-Maze generator with most popular shapes - hexagon, triangle, square (sqaure not implemented yet):
+Maze generator with most popular shapes - hexagon, triangle, square:
 
 
 1. Theory: 
@@ -67,6 +67,10 @@ algorithm which travels around the dual graph and creates actual maze. The last 
   with only one wall so it has no sense to continue this iteration). To tell if the edges are intersected I use functions doIntersect() which uses orientation(), which
   returns orientation of the given vectors, and onSegment which tells us whether the intersect point is in the range of the vectors.
   
+  3.5 In addition I created a pathfinder which takes given startnode and goalnode. It works with Breadth First Search Algorithm. This is algorithm.
+  
+  ![image](https://user-images.githubusercontent.com/67116759/146687366-d69a08d8-d5c4-4e5d-a927-df8a86a5abfb.png)
+  
 4. Some information
 
 - It is possible to turn off display of the dual graph (ways), just comment last but one for loop
@@ -78,6 +82,7 @@ algorithm which travels around the dual graph and creates actual maze. The last 
 - To get the best effect in triangle maze call prepareGraph with columns and rows values in ratio 3:2 (18x12, 24x16 etc.)
 
   ![image](https://user-images.githubusercontent.com/67116759/146642946-04428302-f13e-4d34-878a-1060f6a39599.png)
+  
 
 
   
