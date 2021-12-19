@@ -1,9 +1,11 @@
 import numpy as np
 import random as rd
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 from shapes import *
 from intersect import *
 from finder import *
+
 
 # Author: Kacper Plesiak
 # it is worth to read README.md file at https://github.com/CamaroTheBOSS/Maze-Generator
@@ -152,6 +154,7 @@ def Maze(F: Graph):
                 if (edge[0], edge[1]) not in journey and (edge[1], edge[0]) not in journey:
                     F.edges.remove(edge)
 
+
 # deleting walls (blue edges) if wall intersects with ways (red edges)
 def DeleteIntersections(G: Graph, F: Graph):
     # for each way find wall which intersect this specific way and delete this specific wall
@@ -177,11 +180,14 @@ Maze(Zd)
 # 4.
 DeleteIntersections(Z, Zd)
 
+
+# prepare a path solution from node 0 to node 20*20 - 1 (last one)
 Path = BreadthFirstSearch(Zd, 0, 20*20 - 1)
 S = Graph()
 S.nodes = Zd.nodes
 S.edges = Path
 # plotting ways
+fig = plt.figure()
 for i in range(len(Zd.edges)):
     Zd.plotEdge(i, color='k')
 
@@ -189,6 +195,22 @@ for i in range(len(Zd.edges)):
 for i in range(len(Z.edges)):
     Z.plotEdge(i)
 
-for i in range(len(S.edges)):
-    S.plotEdge(i, color='r')
+#for i in range(len(S.edges)):
+    #S.plotEdge(i, color='r')
+
+def animate(i, F, PATH, data, x, y):
+    if i < len(PATH):
+        nidx1 = PATH[i][0]
+        nidx2 = PATH[i][1]
+        x.append(F.nodes[nidx1][0])
+        x.append(F.nodes[nidx2][0])
+        y.append(F.nodes[nidx1][1])
+        y.append(F.nodes[nidx2][1])
+        data.set_data(x, y)
+
+
+PathData, = plt.plot([], [], 'r', markersize=2)
+x = []
+y = []
+anim = animation.FuncAnimation(fig, animate, fargs=(S, Path, PathData, x, y), interval=10)
 plt.show()

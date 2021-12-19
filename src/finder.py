@@ -1,12 +1,15 @@
 from graph import *
 
+
+# BreadthFirstSearch algorithm does not make us 100% sure that the found path is the shortest one
 def BreadthFirstSearch(F: Graph, startnode: int, goalnode: int):
     idx = startnode
     Visited = [idx]
     Backtracking = [idx]  # contains information about the solution
-    journey = []
+
+    # 1. Repeat while current node is not goalnode
     while idx != goalnode:
-        # 2.1 determining possible ways (to unvisited neighbours)
+        # 1.1 determining possible ways (to unvisited neighbours)
         ways = []
         for edge in F.edges:
             if edge[0] == idx or edge[1] == idx:
@@ -14,7 +17,7 @@ def BreadthFirstSearch(F: Graph, startnode: int, goalnode: int):
                     pass
                 else:
                     ways.append(edge)
-        # 2.2 choose one randomly (if dead end facilitate backtracking)
+        # 1.2 choose the first one
         if len(ways) > 0:
             way = ways[0]
             ways.remove(way)
@@ -25,7 +28,7 @@ def BreadthFirstSearch(F: Graph, startnode: int, goalnode: int):
                 continue
             else:
                 break
-        # 2.3 to Visited list add next node which way leads to and add this node to backtracking list
+        # 1.3 to Visited list add next node which way leads to and add this node to backtracking list
         if way[0] == idx:
             idx = way[1]
         else:
@@ -37,8 +40,8 @@ def BreadthFirstSearch(F: Graph, startnode: int, goalnode: int):
         else:
             Visited.append(way[1])
             Backtracking.append(way[1])
-        # 2.4 track the journey of algorithm to have information about edges we must not delete
-        journey.append(way)
+
+    # 2. Connect nodes from Backtracking list and return Solution
     Solution = []
     for idx, element in enumerate(Backtracking):
         if idx != 0:
