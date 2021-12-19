@@ -3,7 +3,7 @@ import random as rd
 import matplotlib.pyplot as plt
 from shapes import *
 from intersect import *
-
+from finder import *
 
 # Author: Kacper Plesiak
 # it is worth to read README.md file at https://github.com/CamaroTheBOSS/Maze-Generator
@@ -152,7 +152,6 @@ def Maze(F: Graph):
                 if (edge[0], edge[1]) not in journey and (edge[1], edge[0]) not in journey:
                     F.edges.remove(edge)
 
-
 # deleting walls (blue edges) if wall intersects with ways (red edges)
 def DeleteIntersections(G: Graph, F: Graph):
     # for each way find wall which intersect this specific way and delete this specific wall
@@ -169,9 +168,8 @@ def DeleteIntersections(G: Graph, F: Graph):
 
 # Algorithm:
 Z = Graph()  # grid
-S = Graph()  # solution from first visited node to last visited node
 # 1.
-prepareGraph(Z, columns=4, rows=4, shape='Hexagon')
+prepareGraph(Z, columns=20, rows=20, shape='Square')
 # 2.
 Zd = DualGraph(Z)
 # 3.
@@ -179,15 +177,18 @@ Maze(Zd)
 # 4.
 DeleteIntersections(Z, Zd)
 
+Path = BreadthFirstSearch(Zd, 0, 20*20 - 1)
+S = Graph()
+S.nodes = Zd.nodes
+S.edges = Path
 # plotting ways
 for i in range(len(Zd.edges)):
-    Zd.plotEdge(i, color='r')
+    Zd.plotEdge(i, color='k')
 
 # plotting walls
 for i in range(len(Z.edges)):
     Z.plotEdge(i)
 
 for i in range(len(S.edges)):
-    S.plotEdge(i, color='g')
-
+    S.plotEdge(i, color='r')
 plt.show()
