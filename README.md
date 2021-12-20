@@ -72,7 +72,7 @@ algorithm which travels around the dual graph and creates actual maze. The last 
   
 4. Some information
 
-- It is possible to turn off display of the dual graph (ways), just do not plot dualgraph (comment Gdual.plotGraph())
+- It is possible to turn off display of the dual graph (ways), just do not plot dualgraph (comment Zd.plotGraph())
 
 ![image](https://user-images.githubusercontent.com/67116759/146567693-fbc120fd-6417-4edb-95c4-5378ed3f3fab.png)
 
