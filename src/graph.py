@@ -19,7 +19,6 @@ class Graph:
         self.faces.append(nodes)
 
     def plotGraph(self, color='b'):
-        # 1. to not duplicated the edges and improve optimization if node
         Added = []
         for k in self.nodes:
             x, y = [], []

@@ -8,7 +8,7 @@ def BreadthFirstSearch(F: Graph, startnode: int, goalnode: int):
     Visited = [idx]
     Backtracking = [idx]  # contains information about the solution
 
-    # 2. While any node is unvisited
+    # 2. While currentnode is not goalnode
     while idx != goalnode:
         # 2.1 determining possible ways (to unvisited neighbours)
         ways = []
@@ -34,10 +34,13 @@ def BreadthFirstSearch(F: Graph, startnode: int, goalnode: int):
         Visited.append(idx)
         Backtracking.append(idx)
 
+    # 3. prepare Solution and return it
     Solution = {}
+    # 3.1 Give structure of dictionary
     for i in range(len(F.edges)):
         Solution[i] = []
 
+    # 3.1 Fill dictionary with connections
     for i in range(len(Backtracking)):
         if i > 0:
             Solution[Backtracking[i - 1]].append(Backtracking[i])

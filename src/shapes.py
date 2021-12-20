@@ -1,8 +1,9 @@
 from graph import Graph
 
 
+# Building Structure Function
 def BuildShape(G: Graph, x, y, shiftX, shiftY, v=6):
-    # 3. Adding Nodes
+    # 1. Adding Nodes (Added list is because we do not want to add duplicated nodes and edges)
     Added = []
     if (x, y) not in G.nodes.values():
         G.addNode(x, y)
@@ -14,7 +15,7 @@ def BuildShape(G: Graph, x, y, shiftX, shiftY, v=6):
             G.addNode(x, y)
         Added.append((x, y))
 
-    # 4. Adding Edges and Faces
+    # 2. Adding Edges and Faces
     Face = []
     for i in range(len(Added)):
         value1 = Added[i - 1]
@@ -32,6 +33,7 @@ def BuildShape(G: Graph, x, y, shiftX, shiftY, v=6):
     G.faces.append(Face)
 
 
+# Hexagon shape
 def Hex(G: Graph, column, row, a):
     # 1. Defining starting point
     if (row + 1) % 2 == 0:
@@ -44,9 +46,11 @@ def Hex(G: Graph, column, row, a):
     shiftX = [a, 0, -a, -a, 0, a]
     shiftY = [0.5*a, a, 0.5*a, -0.5*a, -a, -0.5*a]
 
+    # 2. Build Structure
     BuildShape(G, x, y, shiftX, shiftY, v=6)
 
 
+# Triangle shape
 def Triangle(G: Graph, column, row, a):
     h = 0.9 * a
     # 1. Defining starting point and shape
@@ -71,14 +75,18 @@ def Triangle(G: Graph, column, row, a):
         shiftX = [a, -0.5*a, -0.5*a]
         shiftY = [0, h, -h]
 
+    # 2. Build Structure
     BuildShape(G, x, y, shiftX, shiftY, v=3)
 
 
+# Square shape
 def Square(G: Graph, column, row, a):
+    # 1. Defining shape
     x = a * column
     y = - a * row
 
     shiftX = [a, 0, -a, 0]
     shiftY = [0, -a, 0, a]
 
+    # 2. Build Structure
     BuildShape(G, x, y, shiftX, shiftY, v=4)
