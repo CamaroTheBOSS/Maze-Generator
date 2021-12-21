@@ -82,33 +82,6 @@ algorithm which travels around the dual graph and creates actual maze. The last 
 
   ![image](https://user-images.githubusercontent.com/67116759/146642946-04428302-f13e-4d34-878a-1060f6a39599.png)
   
- 5. Big EDIT:
- - I was not satisfied of the optimization of this program so I decided to refactor it a little bit
- - In first version nodes and edges were lists and face list contained edge which creates specific face. Now nodes and edges are stored in dictionaries and face list
- contains every node which creates specific face. This change increased code readibility and created lots of new possibilities to improve optimization
- - Previously in prepareGraph() after creating a grid of shapes I had to remove duplicates of nodes and edges in grid and repair indexes in edges and faces 
- (because after deleting nodes some edges were containing wrong indexes). Now it is not neccessary because of the new, better code
- - In DualGraph() I improved k-nearest-neighbours algorithm. Previously it iterated through all the nodes (in every case) and choosed 6 (for Hexagon Maze) nearest nodes. After      that it checked whether these nodes distances are smaller than "condition" variable value. Now it iterate through the nodes and stops when it find 6 nearest neighbours, 
-   because it checks whether node distance are smaller than "condition" variable regularly (it does not need to iterate through all the nodes but iterate until it find 6
-   nodes which meet the condition)
- - In Maze() I could have deleted useless "if" conditions. It increased speed of the function, but most important thing I have done is to delete unused ways after visiting
-   each node, so after "while loop". Previously algorithm was iterating through all the nodes to find a way to delete in every "while loop" iteration. This is powerful
-   performace boost
- - In DeleteIntersections() previosly to find which wall is intersected by specific way, algorithm iterated through all the walls. Now it iterating only through the walls
-   which are part of specific face (faces have the same indexes as the DualGraph nodes which are centers of specific face). Now this function is superfast.
- - Moreover some smallest improvments were added e.g. calculating static values before loops (previosly static values were calculated in each iteration)
- - In k-nearest-neighbours now is used abs(x1 - x2) func instead of sqrt((x1 - x2)^2). This is big improvment.
- - Below, I showed diffrences in optimization between first and second version of the program for 30x30 Hexagon Maze:
-   
-   ![image](https://user-images.githubusercontent.com/67116759/146843802-bcb9f0fb-3416-4012-8f63-50e8fc2046d2.png)
-   
-   ![image](https://user-images.githubusercontent.com/67116759/146843877-0e45481a-a440-4779-8cbe-52dd2b945065.png)
-   
- - Only plotting is more complicated because the new structure of the program, but this is the cost for big performace boost in the other parts of the program
- - Below, I put a chart which shows duration of the program depending on the size of the grid (columns * rows value):
-
-  ![image](https://user-images.githubusercontent.com/67116759/146845611-734ee8c4-dba8-4854-a40d-8d44babc5419.png)
-
 
  
   
