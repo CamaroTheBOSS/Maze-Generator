@@ -1,7 +1,4 @@
-import numpy as np
 import random as rd
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 from shapes import *
 from intersect import *
 from finder import *
