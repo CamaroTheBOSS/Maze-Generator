@@ -1,6 +1,6 @@
 # Maze-Generator
-Maze generator with most popular shapes - hexagon, triangle, square:
-
+Maze generator with most popular shapes - hexagon, triangle, square. Simple youtube presentation has been prepared in link below:
+https://youtu.be/fkwV89ySvvY
 
 1. Theory: 
 
