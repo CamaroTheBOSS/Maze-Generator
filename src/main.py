@@ -152,7 +152,9 @@ def DeleteIntersections(G: Graph, F: Graph):
 # Algorithm:
 Z = Graph()
 # 1.
-prepareGraph(Z, columns=40, rows=40, shape='Hexagon')
+cols = 40
+rows = 40
+prepareGraph(Z, columns=cols, rows=rows, shape='Hexagon')
 # 2.
 Zd = DualGraph(Z)
 # 3.
@@ -163,7 +165,7 @@ DeleteIntersections(Z, Zd)
 # Search Algorithm BFS from node 0 to node 60*40 - 1 (last one)
 S = Graph()
 S.nodes = Zd.nodes.copy()
-S.edges = BreadthFirstSearch(Zd, 0, 40*40-1)
+S.edges = BreadthFirstSearch(Zd, 0, cols*rows-1)
 
 # Plotting
 Z.plotGraph()  # blue grid
